@@ -21,6 +21,7 @@ import {
 } from './dialog/dialog-a11y';
 
 import {GridListAccessibilityDemo} from './grid-list/grid-list-a11y';
+import {ListAccessibilityDemo} from './list/list-a11y';
 import {RadioAccessibilityDemo} from './radio/radio-a11y';
 import {ToolbarAccessibilityDemo} from './toolbar/toolbar-a11y';
 import {DatepickerAccessibilityDemo} from './datepicker/datepicker-a11y';
@@ -79,6 +80,7 @@ export class AccessibilityRoutingModule {}
     GridListAccessibilityDemo,
     IconAccessibilityDemo,
     InputAccessibilityDemo,
+    ListAccessibilityDemo,
     MenuAccessibilityDemo,
     ProgressBarAccessibilityDemo,
     ProgressSpinnerAccessibilityDemo,
