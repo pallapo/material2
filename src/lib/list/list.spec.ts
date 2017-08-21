@@ -115,7 +115,7 @@ describe('MdList', () => {
 
     let list = fixture.debugElement.children[0];
     let listItem = fixture.debugElement.children[0].query(By.css('md-list-item'));
-    expect(list.nativeElement.getAttribute('role')).toBe('list');
+    expect(list.nativeElement.getAttribute('role')).toBeNull();
     expect(listItem.nativeElement.getAttribute('role')).toBe('listitem');
   });
 
