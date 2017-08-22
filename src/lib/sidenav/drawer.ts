@@ -15,6 +15,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ContentChildren,
   ElementRef,
   EventEmitter,
@@ -31,6 +32,7 @@ import {
 import {ESCAPE, first, startWith, takeUntil} from '@angular/material/core';
 import {DOCUMENT} from '@angular/platform-browser';
 import {merge} from 'rxjs/observable/merge';
+import {Subject} from "rxjs/Subject";
 import {Subscription} from 'rxjs/Subscription';
 
 
@@ -48,6 +50,20 @@ export class MdDrawerToggleResult {
   constructor(public type: 'open' | 'close', public animationFinished: boolean) {}
 }
 
+
+@Component({
+  moduleId: module.id,
+  selector: 'md-drawer-content, mat-drawer-content',
+  template: '<ng-content></ng-content>',
+  host: {
+    'class': 'mat-drawer-content',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+})
+export class MdDrawerContent {}
+
+
 /**
  * <md-drawer> component.
  *
@@ -58,7 +74,7 @@ export class MdDrawerToggleResult {
 @Component({
   moduleId: module.id,
   selector: 'md-drawer, mat-drawer',
-  templateUrl: 'drawer.html',
+  template: '<ng-content></ng-content>',
   animations: [
     trigger('transform', [
       state('open, open-instant', style({
@@ -117,7 +133,13 @@ export class MdDrawer implements AfterContentInit, OnDestroy {
   set align(value) { this.position = value; }
 
   /** Mode of the drawer; one of 'over', 'push' or 'side'. */
-  @Input() mode: 'over' | 'push' | 'side' = 'over';
+  @Input()
+  get mode() { return this._mode; }
+  set mode(value) {
+    this._mode = value;
+    this._modeChanged.next();
+  }
+  private _mode: 'over' | 'push' | 'side' = 'over';
 
   /** Whether the drawer can be closed with the escape key or by clicking on the backdrop. */
   @Input()
@@ -155,6 +177,8 @@ export class MdDrawer implements AfterContentInit, OnDestroy {
 
   /** @deprecated */
   @Output('align-changed') onAlignChanged = new EventEmitter<void>();
+
+  _modeChanged = new Subject();
 
   get isFocusTrapEnabled() {
     // The focus trap is only enabled when the drawer is open in any mode other than side.
@@ -294,6 +318,7 @@ export class MdDrawer implements AfterContentInit, OnDestroy {
   }
 }
 
+
 /**
  * <md-drawer-container> component.
  *
@@ -316,6 +341,8 @@ export class MdDrawer implements AfterContentInit, OnDestroy {
 })
 export class MdDrawerContainer implements AfterContentInit, OnDestroy {
   @ContentChildren(MdDrawer) _drawers: QueryList<MdDrawer>;
+
+  @ContentChild(MdDrawerContent) _content: MdDrawerContent;
 
   /** The drawer child with the `start` position. */
   get start() { return this._start; }
@@ -361,6 +388,7 @@ export class MdDrawerContainer implements AfterContentInit, OnDestroy {
       this._drawers.forEach((drawer: MdDrawer) => {
         this._watchDrawerToggle(drawer);
         this._watchDrawerPosition(drawer);
+        this._watchDrawerMode(drawer);
       });
     });
   }
@@ -414,6 +442,14 @@ export class MdDrawerContainer implements AfterContentInit, OnDestroy {
         this._validateDrawers();
       });
     });
+  }
+
+  /** Subscribes to changes in drawer mode so we can run change detection. */
+  private _watchDrawerMode(drawer: MdDrawer): void {
+    if (drawer) {
+      takeUntil.call(drawer._modeChanged, this._drawers.changes).subscribe(
+          () => this._changeDetectorRef.markForCheck());
+    }
   }
 
   /** Toggles the 'mat-drawer-opened' class on the main 'md-drawer-container' element. */
