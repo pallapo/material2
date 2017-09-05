@@ -143,7 +143,6 @@ export class MdListItem extends _MdListItemMixinBase implements AfterContentInit
 
   constructor(private _renderer: Renderer2,
               private _element: ElementRef,
-              @Optional() private _list: MdList,
               @Optional() private _navList: MdNavList) {
     super();
     this._isNavList = !!_navList;
@@ -155,7 +154,7 @@ export class MdListItem extends _MdListItemMixinBase implements AfterContentInit
 
   /** Whether this list item should show a ripple effect when clicked.  */
   _isRippleDisabled() {
-    return !this._isNavList || this.disableRipple || this._list.disableRipple;
+    return !this._isNavList || this.disableRipple || this._navList.disableRipple;
   }
 
   _handleFocus() {
