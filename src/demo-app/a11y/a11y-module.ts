@@ -42,6 +42,10 @@ import {
   FoggyTabContent,
 } from './tabs/tabs-a11y';
 import {TooltipAccessibilityDemo} from './tooltip/tooltip-a11y';
+import {SidenavAccessibilityDemo} from './sidenav/sidenav-a11y';
+import {SidenavBasicAccessibilityDemo} from './sidenav/basic-sidenav-a11y';
+import {SidenavDualAccessibilityDemo} from './sidenav/dual-sidenav-a11y';
+import {SidenavMobileAccessibilityDemo} from './sidenav/mobile-sidenav-a11y';
 
 
 @NgModule({
@@ -79,6 +83,7 @@ export class AccessibilityRoutingModule {}
     DialogNeptuneIFrameDialog,
     DialogWelcomeExampleDialog,
     ExpansionPanelAccessibilityDemo,
+    FoggyTabContent,
     GridListAccessibilityDemo,
     IconAccessibilityDemo,
     InputAccessibilityDemo,
@@ -87,15 +92,18 @@ export class AccessibilityRoutingModule {}
     ProgressBarAccessibilityDemo,
     ProgressSpinnerAccessibilityDemo,
     RadioAccessibilityDemo,
-    ToolbarAccessibilityDemo,
+    RainyTabContent,
+    SelectAccessibilityDemo,
+    SidenavAccessibilityDemo,
+    SidenavBasicAccessibilityDemo,
+    SidenavDualAccessibilityDemo,
+    SidenavMobileAccessibilityDemo,
     SliderAccessibilityDemo,
     SlideToggleAccessibilityDemo,
     SnackBarAccessibilityDemo,
-    SelectAccessibilityDemo,
-    TabsAccessibilityDemo,
     SunnyTabContent,
-    RainyTabContent,
-    FoggyTabContent,
+    TabsAccessibilityDemo,
+    ToolbarAccessibilityDemo,
     TooltipAccessibilityDemo,
   ],
   entryComponents: [
@@ -105,9 +113,9 @@ export class AccessibilityRoutingModule {}
     DialogNeptuneExampleDialog,
     DialogNeptuneIFrameDialog,
     DialogWelcomeExampleDialog,
-    SunnyTabContent,
-    RainyTabContent,
     FoggyTabContent,
+    RainyTabContent,
+    SunnyTabContent,
   ]
 })
 export class AccessibilityDemoModule {}
