@@ -51,7 +51,7 @@ export class MdListDivider {}
     'role': 'navigation',
     'class': 'mat-nav-list'
   },
-  template: '<ng-content></ng-content>',
+  templateUrl: 'list.html',
   styleUrls: ['list.css'],
   inputs: ['disableRipple'],
   encapsulation: ViewEncapsulation.None,
@@ -62,7 +62,7 @@ export class MdNavList extends _MdListMixinBase implements CanDisableRipple {}
 @Component({
   moduleId: module.id,
   selector: 'md-list, mat-list',
-  template: '<ng-content></ng-content>',
+  templateUrl: 'list.html',
   host: {'class': 'mat-list'},
   styleUrls: ['list.css'],
   inputs: ['disableRipple'],
