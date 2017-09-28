@@ -1,4 +1,6 @@
-import {Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
@@ -15,37 +17,59 @@ export class AccessibilityHome {}
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
 })
-export class AccessibilityDemo {
+export class AccessibilityDemo implements OnDestroy {
   @ViewChild('maincontent') mainContent: ElementRef;
+  @ViewChild('header') sectionHeader: ElementRef;
+  currentComponent: string = '';
+
+  fullscreen = false;
+
+  private _routerSubscription = Subscription.EMPTY;
 
   navItems = [
     {name: 'Home', route: '.'},
     {name: 'Autocomplete', route: 'autocomplete'},
-    {name: 'Button', route: 'button'},
     {name: 'Button toggle', route: 'button-toggle'},
+    {name: 'Button', route: 'button'},
     {name: 'Card', route: 'card'},
     {name: 'Checkbox', route: 'checkbox'},
     {name: 'Chips', route: 'chips'},
     {name: 'Datepicker', route: 'datepicker'},
     {name: 'Dialog', route: 'dialog'},
+    {name: 'Expansion panel', route: 'expansion'},
     {name: 'Grid list', route: 'grid-list'},
     {name: 'Icon', route: 'icon'},
     {name: 'Input', route: 'input'},
+    {name: 'List', route: 'list'},
     {name: 'Menu', route: 'menu'},
     {name: 'Progress bar', route: 'progress-bar'},
     {name: 'Progress spinner', route: 'progress-spinner'},
     {name: 'Radio buttons', route: 'radio'},
-    {name: 'Slider', route: 'slider'},
-    {name: 'Slide toggle', route: 'slide-toggle'},
-    {name: 'Snack bar', route: 'snack-bar'},
     {name: 'Select', route: 'select'},
+    {name: 'Sidenav', route: 'sidenav'},
+    {name: 'Slide toggle', route: 'slide-toggle'},
+    {name: 'Slider', route: 'slider'},
+    {name: 'Snack bar', route: 'snack-bar'},
     {name: 'Tabs', route: 'tabs'},
     {name: 'Toolbar', route: 'toolbar'},
     {name: 'Tooltip', route: 'tooltip'},
   ];
 
+  constructor(private router: Router) {
+    this._routerSubscription = router.events.subscribe(event => {
+      let nav = this.navItems.find(navItem => {
+        let fragments = (event as NavigationEnd).url.split('/');
+        return fragments[fragments.length - 1] === navItem.route;
+      });
+      this.currentComponent = nav ? nav.name : '';
+    });
+  }
+
   skipNavigation() {
-    this.mainContent.nativeElement.scrollIntoView();
-    this.mainContent.nativeElement.focus();
+    (this.currentComponent ? this.sectionHeader : this.mainContent).nativeElement.focus();
+  }
+
+  ngOnDestroy() {
+    this._routerSubscription.unsubscribe();
   }
 }

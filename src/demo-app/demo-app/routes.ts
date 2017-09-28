@@ -28,7 +28,6 @@ import {ProgressSpinnerDemo} from '../progress-spinner/progress-spinner-demo';
 import {RadioDemo} from '../radio/radio-demo';
 import {RippleDemo} from '../ripple/ripple-demo';
 import {SelectDemo} from '../select/select-demo';
-import {SidenavDemo} from '../sidenav/sidenav-demo';
 import {SlideToggleDemo} from '../slide-toggle/slide-toggle-demo';
 import {SliderDemo} from '../slider/slider-demo';
 import {SnackBarDemo} from '../snack-bar/snack-bar-demo';
@@ -40,6 +39,7 @@ import {ToolbarDemo} from '../toolbar/toolbar-demo';
 import {TooltipDemo} from '../tooltip/tooltip-demo';
 import {TypographyDemo} from '../typography/typography-demo';
 import {DemoApp, Home} from './demo-app';
+import {SidenavDemo} from '../sidenav/sidenav-demo';
 
 export const DEMO_APP_ROUTES: Routes = [
   {path: '', component: DemoApp, children: [

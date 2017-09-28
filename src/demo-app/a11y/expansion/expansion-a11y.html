@@ -1,0 +1,53 @@
+<section class="demo-expansion">
+  <h2>Siberian Husky</h2>
+  <p>Single expansion panel</p>
+  <md-expansion-panel class="md-expansion-demo-width" #myPanel>
+    <md-expansion-panel-header>
+      <mat-panel-description>
+        Dog breed
+      </mat-panel-description>
+      <mat-panel-title>Siberian Husky</mat-panel-title>
+    </md-expansion-panel-header>
+    The Siberian Husky is a medium size working dog breed that originated
+    in north-eastern Siberia, Russia. The breed belongs to the Spitz genetic family.
+    <md-action-row>
+      <button md-button (click)="myPanel.expanded = false">Cancel</button>
+      <a md-button href="https://en.wikipedia.org/wiki/Siberian_Husky" target="_blank">Wikipedia</a>
+    </md-action-row>
+  </md-expansion-panel>
+</section>
+
+<section class="demo-expansion">
+  <h2>Dog breeds</h2>
+  <p>Multiple expansion panel</p>
+  <md-accordion class="md-expansion-demo-width">
+    <md-expansion-panel #panel1 >
+      <md-expansion-panel-header>Golden Retriever</md-expansion-panel-header>
+      <p>
+        The Golden Retriever is a large-sized breed of dog bred as gun dogs to retrieve shot
+        waterfowl such as ducks and upland game birds during hunting and shooting parties, and
+        were named 'retriever' because of their ability to retrieve shot game undamaged.
+        Golden Retrievers have an instinctive love of water, and are easy to train to basic
+        or advanced obedience standards.
+      </p>
+    </md-expansion-panel>
+    <md-expansion-panel #panel2 [disabled]="true">
+      <md-expansion-panel-header>Beagle</md-expansion-panel-header>
+      <p>
+        The Beagle is a breed of small hound, similar in appearance to the much larger foxhound.
+        The beagle is a scent hound, developed primarily for hunting hare.
+      </p>
+    </md-expansion-panel>
+    <md-expansion-panel #panel3 >
+      <md-expansion-panel-header>Dachshund</md-expansion-panel-header>
+      <p>
+        The dachshund is a short-legged, long-bodied, hound-type dog breed. The standard size
+        dachshund was developed to scent, chase, and flush out badgers and other burrow-dwelling
+        animals, while the miniature ...
+      </p>
+      <md-action-row>
+        <button md-button (click)="panel3.expanded = false">Close</button>
+      </md-action-row>
+    </md-expansion-panel>
+  </md-accordion>
+</section>

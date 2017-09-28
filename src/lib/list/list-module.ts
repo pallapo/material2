@@ -18,12 +18,10 @@ import {
   MdDividerCssMatStyler,
   MdList,
   MdListAvatarCssMatStyler,
-  MdListCssMatStyler,
   MdListDivider,
   MdListIconCssMatStyler,
   MdListItem,
   MdListSubheaderCssMatStyler,
-  MdNavListCssMatStyler,
 } from './list';
 import {MdListOption, MdSelectionList} from './selection-list';
 
@@ -38,8 +36,6 @@ import {MdListOption, MdSelectionList} from './selection-list';
     MdLineModule,
     MdCommonModule,
     MdListIconCssMatStyler,
-    MdListCssMatStyler,
-    MdNavListCssMatStyler,
     MdDividerCssMatStyler,
     MdListSubheaderCssMatStyler,
     MdPseudoCheckboxModule,
@@ -52,8 +48,6 @@ import {MdListOption, MdSelectionList} from './selection-list';
     MdListDivider,
     MdListAvatarCssMatStyler,
     MdListIconCssMatStyler,
-    MdListCssMatStyler,
-    MdNavListCssMatStyler,
     MdDividerCssMatStyler,
     MdListSubheaderCssMatStyler,
     MdSelectionList,

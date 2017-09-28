@@ -46,36 +46,31 @@ export class MdListDivider {}
 /** A Material Design list component. */
 @Component({
   moduleId: module.id,
-  selector: 'md-list, mat-list, md-nav-list, mat-nav-list',
-  host: {'role': 'list'},
-  template: '<ng-content></ng-content>',
+  selector: 'md-nav-list, mat-nav-list',
+  host: {
+    'role': 'navigation',
+    'class': 'mat-nav-list'
+  },
+  templateUrl: 'list.html',
   styleUrls: ['list.css'],
   inputs: ['disableRipple'],
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdList extends _MdListMixinBase implements CanDisableRipple {}
+export class MdNavList extends _MdListMixinBase implements CanDisableRipple {}
 
-/**
- * Directive whose purpose is to add the mat- CSS styling to this selector.
- * @docs-private
- */
-@Directive({
+@Component({
+  moduleId: module.id,
   selector: 'md-list, mat-list',
-  host: {'class': 'mat-list'}
+  templateUrl: 'list.html',
+  host: {'class': 'mat-list'},
+  styleUrls: ['list.css'],
+  inputs: ['disableRipple'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdListCssMatStyler {}
-
-/**
- * Directive whose purpose is to add the mat- CSS styling to this selector.
- * @docs-private
- */
-@Directive({
-  selector: 'md-nav-list, mat-nav-list',
-  host: {'class': 'mat-nav-list'}
-})
-export class MdNavListCssMatStyler {}
+export class MdList extends _MdListMixinBase implements CanDisableRipple {}
 
 /**
  * Directive whose purpose is to add the mat- CSS styling to this selector.
@@ -151,10 +146,9 @@ export class MdListItem extends _MdListItemMixinBase implements AfterContentInit
 
   constructor(private _renderer: Renderer2,
               private _element: ElementRef,
-              @Optional() private _list: MdList,
-              @Optional() navList: MdNavListCssMatStyler) {
+              @Optional() private _navList: MdNavList) {
     super();
-    this._isNavList = !!navList;
+    this._isNavList = !!_navList;
   }
 
   ngAfterContentInit() {
@@ -163,7 +157,7 @@ export class MdListItem extends _MdListItemMixinBase implements AfterContentInit
 
   /** Whether this list item should show a ripple effect when clicked.  */
   _isRippleDisabled() {
-    return !this._isNavList || this.disableRipple || this._list.disableRipple;
+    return !this._isNavList || this.disableRipple || this._navList.disableRipple;
   }
 
   _handleFocus() {

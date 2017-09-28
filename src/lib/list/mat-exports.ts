@@ -11,13 +11,11 @@ import {
   MdList,
   MdListAvatarCssMatStyler,
   MdListBase,
-  MdListCssMatStyler,
   MdListDivider,
   MdListIconCssMatStyler,
   MdListItem,
   MdListItemBase,
   MdListSubheaderCssMatStyler,
-  MdNavListCssMatStyler,
 } from './list';
 import {
   MdListOption,
@@ -33,7 +31,6 @@ export {MdDividerCssMatStyler as MatDividerCssMatStyler};
 export {MdList as MatList};
 export {MdListAvatarCssMatStyler as MatListAvatarCssMatStyler};
 export {MdListBase as MatListBase};
-export {MdListCssMatStyler as MatListCssMatStyler};
 export {MdListDivider as MatListDivider};
 export {MdListIconCssMatStyler as MatListIconCssMatStyler};
 export {MdListItem as MatListItem};
@@ -42,7 +39,6 @@ export {MdListModule as MatListModule};
 export {MdListOption as MatListOption};
 export {MdListOptionBase as MatListOptionBase};
 export {MdListSubheaderCssMatStyler as MatListSubheaderCssMatStyler};
-export {MdNavListCssMatStyler as MatNavListCssMatStyler};
 export {MdSelectionList as MatSelectionList};
 export {MdSelectionListBase as MatSelectionListBase};
 export {MdSelectionListOptionEvent as MatSelectionListOptionEvent};
