@@ -400,13 +400,21 @@ export class MatRadioButton extends _MatRadioButtonMixinBase
   set value(value: any) {
     if (this._value != value) {
       this._value = value;
+      this._markForCheck();
       if (this.radioGroup != null) {
         if (!this.checked) {
           // Update checked when the value changed to match the radio group's value
           this.checked = this.radioGroup.value == value;
         }
         if (this.checked) {
+          const groupValueChanged = this.radioGroup.value !== this.value;
           this.radioGroup.selected = this;
+          if (groupValueChanged) {
+            setTimeout(() => {
+              this.radioGroup._controlValueAccessorChangeFn(this.value);
+              this.radioGroup._emitChangeEvent();
+            });
+          }
         }
       }
     }

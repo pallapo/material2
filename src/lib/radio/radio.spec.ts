@@ -487,6 +487,23 @@ describe('MatRadio', () => {
       fixture.detectChanges();
       expect(testComponent.lastEvent.value).toBe('vanilla');
     });
+
+    it('should update the ngModel value when the selected option value changed', fakeAsync(() => {
+      expect(testComponent.modelValue).toBeUndefined();
+      expect(testComponent.lastEvent).toBeUndefined();
+
+      dispatchFakeEvent(innerRadios[3].nativeElement, 'change');
+      fixture.detectChanges();
+      expect(testComponent.lastEvent.value).toBe('blueberry');
+      expect(testComponent.modelValue).toBe('blueberry');
+
+      testComponent.customOption = 'lemon';
+      fixture.detectChanges();
+      tick();
+
+      expect(testComponent.lastEvent.value).toBe('lemon');
+      expect(testComponent.modelValue).toBe('lemon');
+    }));
   });
 
   describe('group with FormControl', () => {
@@ -786,6 +803,7 @@ class StandaloneRadioButtons {
     <mat-radio-button *ngFor="let option of options" [value]="option.value">
       {{option.label}}
     </mat-radio-button>
+    <mat-radio-button [value]="customOption">CustomOption</mat-radio-button>
   </mat-radio-group>
   `
 })
@@ -796,6 +814,7 @@ class RadioGroupWithNgModel {
     {label: 'Chocolate', value: 'chocolate'},
     {label: 'Strawberry', value: 'strawberry'},
   ];
+  customOption = 'blueberry';
   lastEvent: MatRadioChange;
 }
 
